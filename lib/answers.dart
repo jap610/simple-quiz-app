@@ -4,7 +4,8 @@ import './answers.dart';
 
 class Answers extends StatelessWidget {
 final  Function Handler;
-Answers(this.Handler);
+final  String AnswerText;
+Answers(this.Handler,this.AnswerText);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,7 +13,8 @@ Answers(this.Handler);
       child:
         RaisedButton(
           color: Colors.blue,
-          child: Text('Answer 1'),
+          textColor: Colors.white,
+          child: Text(AnswerText),
           onPressed:Handler,
         ),
     );
