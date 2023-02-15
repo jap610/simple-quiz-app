@@ -1,6 +1,8 @@
+import 'package:NewStart/quiz.dart';
 import 'package:flutter/material.dart';
 import './question.dart';
 import './answers.dart';
+import './result.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final questions = const [
+  final _questions = const [
     {
       'QuestionText': 'what\'s your favorite color?',
       'answers': ['black', 'white', 'white&black', 'black&white']
@@ -36,7 +38,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _x = _x + 1;
     });
-    if (_x < questions.length) {
+    if (_x < _questions.length) {
       print('see you later');
     }
   }
@@ -48,27 +50,9 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('TEST APP'),
         ),
-        body: _x < questions.length
-            ? Column(
-                children: [
-                  Question(
-                    questions[_x]['QuestionText'] as String,
-                  ),
-                  ...(questions[_x]['answers'] as List<String>).map((answers) {
-                    return Answers(_answer, answers);
-                  }).toList()
-                ],
-              )
-            : Container(
-                child: Center(
-                child: Text(
-                  ' i knew it, you are a bmw fan!',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              )),
+        body: _x < _questions.length
+            ? quiz(questions: _questions, answer: _answer, x: _x)
+            : result(),
       ),
     );
   }
